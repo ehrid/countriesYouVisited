@@ -13,7 +13,7 @@ import com.countriesyouvisited.activities.DialogActivity;
 public class PlanDialog extends DialogActivity {
 
     @Override
-    protected void onClickAction(View v) {
+    protected void onCreateDialog(Bundle savedInstanceState) {
         View inflated = initializeDialogBody();
     }
 
@@ -25,9 +25,8 @@ public class PlanDialog extends DialogActivity {
     }
 
     @Override
-    protected void onCreateDialog(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-
+    protected void onClickAction(View v) {
+        //
     }
 
 }

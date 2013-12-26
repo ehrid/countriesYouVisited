@@ -23,18 +23,18 @@
             </intent-filter>
         </activity>
         <activity android:name="com.countriesyouvisited.loading.LogoApplication" />
-        <activity android:name="com.countriesyouvisited.activities.MapActivity" />
+        <activity android:name="com.countriesyouvisited.activities.MainActivity" />
         <activity
-            android:name="com.countriesyouvisited.dialog.PlanActivity"
+            android:name="com.countriesyouvisited.dialog.PlanDialog"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.dialog.AddActivity"
+            android:name="com.countriesyouvisited.dialog.AddDialog"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.councom.countriesyouvisited.dialog.RemoveActivity"
+            android:name="com.countriesyouvisited.dialog.RemoveDialog"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.dialog.StatsActivity"
+            android:name="com.countriesyouvisited.dialog.StatsDialog"
             android:theme="@style/transparentBackground" />
     </application>
 

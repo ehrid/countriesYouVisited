@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.countriesyouvisited.R;
-import com.countriesyouvisited.activities.MapActivity;
+import com.countriesyouvisited.activities.MainActivity;
 
 /**
  * @author horodysk
@@ -19,7 +19,7 @@ public class LogoApplication extends SplashscreanActivity {
 
     @Override
     void startActivity() {
-        Intent intent = new Intent(LogoApplication.this, MapActivity.class);
+        Intent intent = new Intent(LogoApplication.this, MainActivity.class);
         startActivity(intent);
     }
 
