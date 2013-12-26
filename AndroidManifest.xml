@@ -25,16 +25,15 @@
         <activity android:name="com.countriesyouvisited.loading.LogoApplication" />
         <activity android:name="com.countriesyouvisited.activities.MapActivity" />
         <activity
-            android:name="com.countriesyouvisited.activities.PlanActivity"
+            android:name="com.countriesyouvisited.dialog.PlanActivity"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.activities.AddActivity"
+            android:name="com.countriesyouvisited.dialog.AddActivity"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.activities.RemoveActivity"
-            android:theme="@style/transparentBackground" />
+            android:name="com.councom.countriesyouvisited.dialog.RemoveActivity      android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.activities.StatsActivity"
+            android:name="com.countriesyouvisited.dialog.StatsActivity"
             android:theme="@style/transparentBackground" />
     </application>
 
