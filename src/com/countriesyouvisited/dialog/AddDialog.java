@@ -1,9 +1,12 @@
 package com.countriesyouvisited.dialog;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -28,6 +31,8 @@ public class AddDialog extends DialogActivity {
 
     DataBaseHandler _db;
 
+    Typeface _font;
+
     @Override
     protected void onCreateDialog(Bundle savedInstanceState) {
         View inflated = initializeDialogBody();
@@ -35,10 +40,20 @@ public class AddDialog extends DialogActivity {
         initializeDialogItems(inflated);
         setButtonFont();
 
-        TextView childAt = (TextView) _name.getSelectedItem();
-        childAt.setTextColor(0xFFFFFF);
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/YouRookMarbelous.ttf");
-        childAt.setTypeface(font);
+        _name.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
+                TextView childAt = (TextView) parentView.getChildAt(0);
+                childAt.setTextColor(Color.WHITE);
+                childAt.setTypeface(_font);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
     }
 
@@ -60,8 +75,8 @@ public class AddDialog extends DialogActivity {
     }
 
     private void setButtonFont() {
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/YouRookMarbelous.ttf");
-        _add.setTypeface(font);
+        _font = Typeface.createFromAsset(getAssets(), "fonts/YouRookMarbelous.ttf");
+        _add.setTypeface(_font);
     }
 
     @Override
