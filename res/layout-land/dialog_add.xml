@@ -1,10 +1,29 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250sp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:gravity="center_horizontal">
 
-    <ImageView
-        android:layout_width="200sp"
-        android:layout_height="200sp"
-        android:src="@drawable/dialog_empty" />
+    <Spinner
+        android:id="@+id/add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/country_arrays"
+        android:prompt="@string/country_prompt" />
 
-</RelativeLayout>
+    <DatePicker
+        android:id="@+id/add_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="@dimen/menu_button_width"
+        android:layout_height="@dimen/menu_button_height"
+        android:layout_margin="@dimen/menu_button_margins"
+        android:background="@drawable/style_button"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/menu_button_text_size"
+        android:text="@string/menu_add" />
+
+</LinearLayout>

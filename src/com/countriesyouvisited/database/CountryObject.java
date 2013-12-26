@@ -11,6 +11,13 @@ public class CountryObject {
     private String _date;
 
     /***/
+    public CountryObject(String name, String date) {
+        _id = 0;
+        _name = name;
+        _date = date;
+    }
+
+    /***/
     public CountryObject(int id, String name, String date) {
         _id = id;
         _name = name;
