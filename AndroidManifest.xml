@@ -31,7 +31,8 @@
             android:name="com.countriesyouvisited.dialog.AddActivity"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.councom.countriesyouvisited.dialog.RemoveActivity      android:theme="@style/transparentBackground" />
+            android:name="com.councom.countriesyouvisited.dialog.RemoveActivity"
+            android:theme="@style/transparentBackground" />
         <activity
             android:name="com.countriesyouvisited.dialog.StatsActivity"
             android:theme="@style/transparentBackground" />
