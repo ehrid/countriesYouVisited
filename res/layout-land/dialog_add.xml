@@ -1,15 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250sp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:gravity="center_horizontal">
 
     <Spinner
         android:id="@+id/add_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/menu_button_width"
+        android:layout_height="@dimen/menu_button_height"
         android:entries="@array/country_arrays"
-        android:prompt="@string/country_prompt" />
+        android:prompt="@string/country_prompt" 
+        android:background="@drawable/spinner"
+        android:paddingLeft="5sp"/>
 
     <DatePicker
         android:id="@+id/add_date"

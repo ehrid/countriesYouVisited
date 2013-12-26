@@ -7,6 +7,7 @@ import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.countriesyouvisited.R;
@@ -33,6 +34,12 @@ public class AddDialog extends DialogActivity {
 
         initializeDialogItems(inflated);
         setButtonFont();
+
+        TextView childAt = (TextView) _name.getSelectedItem();
+        childAt.setTextColor(0xFFFFFF);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/YouRookMarbelous.ttf");
+        childAt.setTypeface(font);
+
     }
 
     private View initializeDialogBody() {
