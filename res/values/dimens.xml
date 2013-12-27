@@ -2,7 +2,7 @@
 
     <!-- Dialogs -->
     <dimen name="dialog_stroke">5dp</dimen>
-    <dimen name="dialog_padding">10dp</dimen>
+    <dimen name="dialog_padding">20dp</dimen>
     <dimen name="dialog_close_indentation">-15dp</dimen>
     <dimen name="dialog_margins">30dp</dimen>
     

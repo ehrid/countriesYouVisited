@@ -13,10 +13,22 @@
         android:background="@drawable/spinner"
         android:paddingLeft="5sp"/>
 
-    <DatePicker
-        android:id="@+id/add_date"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="100sp" 
+        android:layout_margin="5sp">
+        
+        <com.countriesyouvisited.wheel.WheelView 
+        android:id="@+id/add_months"
+        android:layout_width="120sp"
+        android:layout_height="match_parent"/>
+    
+    <com.countriesyouvisited.wheel.WheelView 
+        android:id="@+id/add_years"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    
+    </LinearLayout>
 
     <Button
         android:id="@+id/add_button"
