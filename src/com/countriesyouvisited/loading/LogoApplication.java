@@ -14,7 +14,7 @@ public class LogoApplication extends SplashscreanActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLogo(R.drawable.logo_ehrid);
+        setLogo(R.drawable.logo_countries);
     }
 
     @Override

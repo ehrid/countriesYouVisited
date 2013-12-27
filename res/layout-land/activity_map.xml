@@ -5,9 +5,10 @@
     android:background="@color/background_white">
     
     <include
-        android:layout_width="80sp"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         layout="@layout/activity_map_menu" 
+        android:layout_gravity="center_horizontal"
         />
 
     <ImageView

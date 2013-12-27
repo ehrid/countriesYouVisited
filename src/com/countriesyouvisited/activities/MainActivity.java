@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.countriesyouvisited.R;
 import com.countriesyouvisited.dialog.AddDialog;
+import com.countriesyouvisited.dialog.ExitDialogNotyfication;
 import com.countriesyouvisited.dialog.PlanDialog;
 import com.countriesyouvisited.dialog.RemoveDialog;
 import com.countriesyouvisited.dialog.StatsDialog;
@@ -69,7 +70,8 @@ public class MainActivity extends Activity implements OnClickListener {
                 startStatsActivity();
                 break;
             case R.id.button_exit:
-                finish();
+                ExitDialogNotyfication dialog = new ExitDialogNotyfication(this);
+                dialog.show();
                 break;
         }
     }

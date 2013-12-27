@@ -9,13 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.countriesyouvisited.R;
+import com.countriesyouvisited.activities.MainActivity;
 
 /**
  * @author horodysk
  */
-public class RemoveDialogNotyfication extends Dialog implements android.view.View.OnClickListener {
+public class ExitDialogNotyfication extends Dialog implements android.view.View.OnClickListener {
 
-    private RemoveDialog _rootView;
+    private MainActivity _rootView;
 
     private Button _yes;
 
@@ -23,13 +24,10 @@ public class RemoveDialogNotyfication extends Dialog implements android.view.Vie
 
     private TextView _title;
 
-    private int _position;
-
     /***/
-    public RemoveDialogNotyfication(Context context, int position) {
+    public ExitDialogNotyfication(Context context) {
         super(context);
-        _rootView = (RemoveDialog) context;
-        _position = position;
+        _rootView = (MainActivity) context;
     }
 
     @Override
@@ -66,8 +64,8 @@ public class RemoveDialogNotyfication extends Dialog implements android.view.Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.remove_notyfication_yes:
-                _rootView.removeCountry(_position);
                 dismiss();
+                _rootView.finish();
                 break;
             case R.id.remove_notyfication_no:
                 dismiss();
