@@ -8,34 +8,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:text="Plan" />
 
         <Button
             android:id="@+id/button_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add" />
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/button_add"/>
 
         <Button
             android:id="@+id/button_remove"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Remove" />
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/button_minus" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/button_close" />
 
         <Button
             android:id="@+id/button_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Stats" />
-
-        <Button
-            android:id="@+id/button_exit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Exit" />
+            android:text="Stats"
+            android:visibility="invisible" />
 
 </LinearLayout>

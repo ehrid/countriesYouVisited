@@ -4,6 +4,7 @@
 
     <!-- Text colors -->
 	<color name="text_white">#FFFFFF</color>
+	<color name="text_red">#FF0000</color>
 	<color name="text_black">#000000</color>
 	<color name="text_gray">#717171</color>
 

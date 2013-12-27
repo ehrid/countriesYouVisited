@@ -2,9 +2,30 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <ImageView
-        android:layout_width="200sp"
+    <TextView
+        android:id="@+id/remove_no_items"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5sp"
+        android:background="@drawable/button_unactive"
+        android:gravity="center"
+        android:text="NO ADDED COUNTRIES"
+        android:textColor="@color/text_red"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <ListView
+        android:id="@+id/remove_list"
+        android:layout_width="250sp"
         android:layout_height="200sp"
-        android:src="@drawable/dialog_empty" />
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never" >
+    </ListView>
 
 </RelativeLayout>

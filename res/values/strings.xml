@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General -->
+    <string name="app_name">Countries You Visited</string>
     
     <!-- Menu -->
     <string name="menu_add">ADD COUNTRY</string>

@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_background"
+    android:layout_width="200sp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/style_dialog_carbon_background" >
+
+    <LinearLayout
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_dialog_frame"
+        android:orientation="vertical"
+        android:padding="@dimen/dialog_padding" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:src="@drawable/button_remove" />
+
+            <TextView
+                android:id="@+id/remove_notyfication_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:layout_weight="1"
+                android:text="Are you sure?"
+                android:textColor="@color/text_white"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/remove_notyfication_yes"
+                android:layout_width="@dimen/menu_button_width"
+                android:layout_height="@dimen/menu_button_height"
+                android:layout_margin="@dimen/menu_button_margins"
+                android:layout_weight="1"
+                android:background="@drawable/style_button"
+                android:text="Yes"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/menu_button_text_size" />
+
+            <Button
+                android:id="@+id/remove_notyfication_no"
+                android:layout_width="@dimen/menu_button_width"
+                android:layout_height="@dimen/menu_button_height"
+                android:layout_margin="@dimen/menu_button_margins"
+                android:layout_weight="1"
+                android:background="@drawable/style_button"
+                android:text="No"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/menu_button_text_size" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

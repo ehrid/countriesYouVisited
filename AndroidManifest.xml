@@ -13,6 +13,7 @@
         android:configChanges="orientation"
         android:icon="@drawable/ic_launcher"
         android:screenOrientation="landscape"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity android:name="com.countriesyouvisited.loading.LogoEhrid" >
             <intent-filter>
@@ -24,13 +25,13 @@
         <activity android:name="com.countriesyouvisited.loading.LogoApplication" />
         <activity android:name="com.countriesyouvisited.activities.MainActivity" />
         <activity
-            android:name="com.countriesyouvisited.dialog.PlanDialog"
+            android:name="com.countriesyouvisited.dialog.RemoveDialog"
             android:theme="@style/transparentBackground" />
         <activity
             android:name="com.countriesyouvisited.dialog.AddDialog"
             android:theme="@style/transparentBackground" />
         <activity
-            android:name="com.countriesyouvisited.dialog.RemoveDialog"
+            android:name="com.countriesyouvisited.dialog.PlanDialog"
             android:theme="@style/transparentBackground" />
         <activity
             android:name="com.countriesyouvisited.dialog.StatsDialog"
