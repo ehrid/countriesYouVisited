@@ -12,27 +12,27 @@
 
         <Button
             android:id="@+id/button_add"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:background="@drawable/button_add"/>
 
         <Button
             android:id="@+id/button_remove"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:background="@drawable/button_minus" />
 
 
         <Button
             android:id="@+id/button_stats"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:text="Stats"
             android:visibility="invisible" />
 
         <Button
             android:id="@+id/button_exit"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:background="@drawable/button_close" />
 </LinearLayout>
