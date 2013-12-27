@@ -10,15 +10,6 @@
         android:layout_width="70sp"
         android:layout_marginLeft="5sp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_unactive"
-        android:textSize="20sp"
-        android:textColor="@color/text_red" />
-    
-    <TextView
-        android:id="@+id/remove_item_date"
-        android:layout_width="70sp"
-        android:layout_marginLeft="5sp"
-        android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textColor="@color/text_white" />
 

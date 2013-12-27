@@ -95,8 +95,11 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         _db.deleteVisitedCountry(country);
 
+        displayDialogIfNoItems();
+
         String message = position + "/" + _items.size() + " Country " + country.getName() + " (" + country.getDate() + ") removed";
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
     }
 
     /**
