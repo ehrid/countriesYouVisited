@@ -8,20 +8,44 @@ public class CountryObject {
 
     private String _name;
 
-    private String _date;
+    private int _month;
+
+    private int _year;
 
     /***/
-    public CountryObject(String name, String date) {
+    public CountryObject(String name, int month, int year) {
         _id = 0;
         _name = name;
-        _date = date;
+        _month = month;
+        _year = year;
     }
 
     /***/
-    public CountryObject(int id, String name, String date) {
+    public CountryObject(int id, String name, int month, int year) {
         _id = id;
         _name = name;
-        _date = date;
+        _month = month;
+        _year = year;
+    }
+
+    /***/
+    public int getMonth() {
+        return _month;
+    }
+
+    /***/
+    public void setMonth(int month) {
+        _month = month;
+    }
+
+    /***/
+    public int getYear() {
+        return _year;
+    }
+
+    /***/
+    public void setYear(int year) {
+        _year = year;
     }
 
     /***/
@@ -32,16 +56,6 @@ public class CountryObject {
     /***/
     public void setName(String name) {
         _name = name;
-    }
-
-    /***/
-    public String getDate() {
-        return _date;
-    }
-
-    /***/
-    public void setDate(String date) {
-        _date = date;
     }
 
     /***/

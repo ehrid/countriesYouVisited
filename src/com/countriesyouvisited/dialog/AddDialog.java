@@ -111,11 +111,12 @@ public class AddDialog extends DialogActivity implements OnItemSelectedListener 
 
     private void addCountry() {
         String name = (String) _name.getSelectedItem();
-        String date = (_calendar.get(Calendar.YEAR) + (_year.getCurrentItem() - NoOfYears)) + "/" + _month.getCurrentItem();
-        CountryObject country = new CountryObject(name, date);
+        int year = _calendar.get(Calendar.YEAR) + (_year.getCurrentItem() - NoOfYears);
+        int month = _month.getCurrentItem();
+        CountryObject country = new CountryObject(name, year, month);
         _db.addVisitedCountry(country);
 
-        String message = "Country " + name + " (" + date + ") added";
+        String message = "Country " + name + " (" + year + "/" + month + ") added";
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 

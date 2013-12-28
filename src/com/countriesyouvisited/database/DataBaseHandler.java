@@ -21,14 +21,16 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "VisitedCountryDataBase";
 
     // Contacts table name
-    private static final String TABLE_NAME = "VisitedCountry";
+    private static final String TABLE_NAME = "Visited";
 
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
 
     private static final String KEY_NAME = "name";
 
-    private static final String KEY_DATE = "date";
+    private static final String KEY_YEAR = "year";
+
+    private static final String KEY_MONTH = "month";
 
     /***/
     public DataBaseHandler(Context context) {
@@ -41,7 +43,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     }
 
     private String getDiaryPagesCreateTableSQL() {
-        return "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_DATE + " TEXT" + ")";
+        return "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_YEAR + " TEXT," + KEY_MONTH +
+            " TEXT" + ")";
     }
 
     @Override
@@ -61,7 +64,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, country.getName());
-        values.put(KEY_DATE, country.getDate());
+        values.put(KEY_YEAR, country.getYear());
+        values.put(KEY_MONTH, country.getMonth());
 
         // Inserting Row
         db.insert(TABLE_NAME, null, values);
@@ -74,9 +78,9 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public CountryObject getVisitedCountry(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        CountryObject page = new CountryObject(id, "", "");
+        CountryObject page = new CountryObject(id, "", 0, 0);
 
-        Cursor cursor = db.query(TABLE_NAME, new String[] { KEY_ID, KEY_NAME, KEY_DATE }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null,
+        Cursor cursor = db.query(TABLE_NAME, new String[] { KEY_ID, KEY_NAME, KEY_YEAR }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null,
             null, null, null);
 
         if (cursor != null) {
@@ -84,7 +88,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
             if (cursor.getCount() > 0) {
                 page.setName(cursor.getString(1));
-                page.setDate(cursor.getString(2));
+                page.setYear(Integer.parseInt(cursor.getString(2)));
+                page.setMonth(Integer.parseInt(cursor.getString(2)));
             }
             else {
                 addVisitedCountry(page);
@@ -108,7 +113,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                CountryObject page = new CountryObject(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+                CountryObject page = new CountryObject(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor
+                    .getString(2)), Integer.parseInt(cursor.getString(3)));
                 diary.add(page);
             }
             while (cursor.moveToNext());
@@ -136,7 +142,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, country.getName());
-        values.put(KEY_DATE, country.getDate());
+        values.put(KEY_YEAR, country.getYear());
+        values.put(KEY_MONTH, country.getMonth());
 
         // updating row
         return db.update(TABLE_NAME, values, KEY_ID + " = ?", new String[] { String.valueOf(country.getId()) });

@@ -60,7 +60,7 @@ public class CountryListViewAdapter extends ArrayAdapter<CountryObject> {
         TextView date = (TextView) inventoryItemView.findViewById(R.id.remove_item_date);
         TextView name = (TextView) inventoryItemView.findViewById(R.id.remove_item_name);
 
-        date.setText(item.getDate());
+        date.setText(item.getYear() + "/" + item.getMonth());
         name.setText(item.getName());
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/YouRookMarbelous.ttf");

@@ -97,7 +97,8 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         displayDialogIfNoItems();
 
-        String message = position + "/" + _items.size() + " Country " + country.getName() + " (" + country.getDate() + ") removed";
+        String message = position + "/" + _items.size() + " Country " + country.getName() + " (" + country.getYear() + "/" + country.getMonth() +
+            ") removed";
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
     }
@@ -113,9 +114,10 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         @Override
         public int compare(CountryObject o1, CountryObject o2) {
-            int dateCompare = o2.getDate().compareTo(o1.getDate());
+            int yearCompare = Integer.toString(o2.getYear()).compareTo(Integer.toString(o1.getYear()));
+            int monthCompare = Integer.toString(o2.getMonth()).compareTo(Integer.toString(o1.getMonth()));
             int nameCompare = o2.getName().compareTo(o1.getName());
-            return dateCompare == 0 ? nameCompare : dateCompare;
+            return yearCompare == 0 ? (monthCompare == 0 ? nameCompare : monthCompare) : yearCompare;
         }
     }
 
