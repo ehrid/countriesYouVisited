@@ -113,8 +113,8 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         @Override
         public int compare(CountryObject o1, CountryObject o2) {
-            int dateCompare = o1.getDate().compareTo(o2.getDate());
-            int nameCompare = o1.getName().compareTo(o2.getName());
+            int dateCompare = o2.getDate().compareTo(o1.getDate());
+            int nameCompare = o2.getName().compareTo(o1.getName());
             return dateCompare == 0 ? nameCompare : dateCompare;
         }
     }

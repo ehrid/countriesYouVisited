@@ -23,7 +23,7 @@
         <item>Australia</item>
         <item>Austria</item>
         <item>Azerbaijan</item>
-        <item>Bahamas, The</item>
+        <item>Bahamas</item>
         <item>Bahrain</item>
         <item>Bangladesh</item>
         <item>Barbados</item>
@@ -72,6 +72,7 @@
         <item>Eritrea</item>
         <item>Estonia</item>
         <item>Ethiopia</item>
+        <item>Falkland islands</item>
         <item>Fiji</item>
         <item>Finland</item>
         <item>France</item>
@@ -82,6 +83,7 @@
         <item>Ghana</item>
         <item>Greece</item>
         <item>Grenada</item>
+        <item>Guadeloupe</item>
         <item>Guatemala</item>
         <item>Guinea</item>
         <item>Guinea-Bissau</item>
@@ -128,6 +130,7 @@
         <item>Mali</item>
         <item>Malta</item>
         <item>Marshall Islands</item>
+        <item>Martinique</item>
         <item>Mauritania</item>
         <item>Mauritius</item>
         <item>Mexico</item>
@@ -160,14 +163,16 @@
         <item>Philippines</item>
         <item>Poland</item>
         <item>Portugal</item>
+        <item>Puerto Rico</item>
         <item>Qatar</item>
         <item>Romania</item>
         <item>Russia</item>
         <item>Rwanda</item>
         <item>Saint Kitts and Nevis</item>
         <item>Saint Lucia</item>
-        <item>Saint Vincent and the Grenadines</item>
+        <item>Saint Vincent</item>
         <item>Samoa </item>
+        <item>San Jose</item>
         <item>San Marino</item>
         <item>Sao Tome and Principe</item>
         <item>Saudi Arabia</item>
@@ -208,14 +213,16 @@
         <item>Ukraine</item>
         <item>United Arab Emirates</item>
         <item>United Kingdom</item>
+        <item>United States</item>
         <item>Uruguay</item>
         <item>Uzbekistan</item>
         <item>Vanuatu</item>
         <item>Venezuela</item>
         <item>Vietnam</item>
+        <item>Yamaica</item>
         <item>Yemen</item>
         <item>Zambia</item>
-<item>Zimbabwe</item>
+		<item>Zimbabwe</item>
     </string-array>
 
 </resources>

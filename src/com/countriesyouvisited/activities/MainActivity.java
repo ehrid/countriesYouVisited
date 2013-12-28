@@ -1,9 +1,13 @@
 package com.countriesyouvisited.activities;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -81,16 +85,7 @@ public class MainActivity extends Activity implements OnClickListener {
         addStrap(R.drawable.map_full);
 
         for (CountryObject country : visited) {
-            if (country.getName().equals("Canada")) {
-                addStrap(R.drawable.strap_canada);
-            }
-            else if (country.getName().equals("Greenland")) {
-                addStrap(R.drawable.strap_greenland);
-
-            }
-            else if (country.getName().equals("Iceland")) {
-                addStrap(R.drawable.strap_iceland);
-            }
+            addStrap(country.getName());
         }
 
     }
@@ -100,6 +95,27 @@ public class MainActivity extends Activity implements OnClickListener {
         imageView.setImageResource(resource);
         imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         _container.addView(imageView);
+    }
+
+    private void addStrap(String name) {
+        Bitmap countryBitmap = getBitmapFromAssets(name);
+        if (countryBitmap != null) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageBitmap(countryBitmap);
+            imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            _container.addView(imageView);
+        }
+    }
+
+    private Bitmap getBitmapFromAssets(String fileName) {
+        try {
+            InputStream istr = getAssets().open("countries/" + fileName + ".png");
+            return BitmapFactory.decodeStream(istr);
+        }
+        catch (IOException e) {
+            return null;
+        }
+
     }
 
     @Override
