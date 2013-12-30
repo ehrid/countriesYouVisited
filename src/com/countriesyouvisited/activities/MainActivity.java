@@ -1,19 +1,16 @@
 package com.countriesyouvisited.activities;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 
 import com.countriesyouvisited.R;
@@ -75,47 +72,20 @@ public class MainActivity extends Activity implements OnClickListener {
     protected void onResume() {
         super.onResume();
         _container.removeAllViews();
-        addStraps();
+        addScratchMap();
     }
 
-    private void addStraps() {
+    private void addScratchMap() {
         _db = new DataBaseHandler(this);
         List<CountryObject> visited = _db.getAllVisitedCountries();
-
-        addStrap(R.drawable.map_full);
-
-        for (CountryObject country : visited) {
-            addStrap(country.getName());
-        }
-
+        addFullMap(visited);
     }
 
-    private void addStrap(int resource) {
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(resource);
-        imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        _container.addView(imageView);
-    }
-
-    private void addStrap(String name) {
-        Bitmap countryBitmap = getBitmapFromAssets(name);
-        if (countryBitmap != null) {
-            ImageView imageView = new ImageView(this);
-            imageView.setImageBitmap(countryBitmap);
-            imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            _container.addView(imageView);
-        }
-    }
-
-    private Bitmap getBitmapFromAssets(String fileName) {
-        try {
-            InputStream istr = getAssets().open("countries/" + fileName + ".png");
-            return BitmapFactory.decodeStream(istr);
-        }
-        catch (IOException e) {
-            return null;
-        }
-
+    private void addFullMap(List<CountryObject> visited) {
+        ImageView map = new ScratchMapImageView(this, visited);
+        map.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        map.setScaleType(ScaleType.MATRIX);
+        _container.addView(map);
     }
 
     @Override
@@ -159,5 +129,4 @@ public class MainActivity extends Activity implements OnClickListener {
         Intent intent = new Intent(MainActivity.this, StatsDialog.class);
         startActivity(intent);
     }
-
 }
