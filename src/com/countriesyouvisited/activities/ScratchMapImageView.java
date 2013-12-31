@@ -20,7 +20,7 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
 import com.countriesyouvisited.R;
-import com.countriesyouvisited.database.CountryObject;
+import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
  * @author horodysk
@@ -30,14 +30,14 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
     private static final int _hiddenColor = Color.GRAY;
 
     /***/
-    public ScratchMapImageView(Context context, List<CountryObject> visited) {
+    public ScratchMapImageView(Context context, List<VisitedRegionObject> visited) {
         super(context);
         this.setOnTouchListener(this);
 
         setImageBitmap(getOverlayedMap(visited));
     }
 
-    private Bitmap getOverlayedMap(List<CountryObject> visited) {
+    private Bitmap getOverlayedMap(List<VisitedRegionObject> visited) {
         Bitmap worldmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.map_full);
         Bitmap map = Bitmap.createBitmap(worldmap.getWidth(), worldmap.getHeight(), worldmap.getConfig());
 
@@ -45,7 +45,7 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
 
         canvas.drawBitmap(worldmap, new Matrix(), null);
 
-        for (CountryObject country : visited) {
+        for (VisitedRegionObject country : visited) {
             int a = country.getMonth() * 10;
 
             Path path = new Path();

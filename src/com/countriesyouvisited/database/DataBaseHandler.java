@@ -3,11 +3,18 @@ package com.countriesyouvisited.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.countriesyouvisited.database.handlers.ContinentDataBaseHandler;
+import com.countriesyouvisited.database.handlers.CountryDataBaseHandler;
+import com.countriesyouvisited.database.handlers.RegionDataBaseHandler;
+import com.countriesyouvisited.database.handlers.VisitedDataBaseHandler;
+import com.countriesyouvisited.database.objects.ContinentObject;
+import com.countriesyouvisited.database.objects.CountryObject;
+import com.countriesyouvisited.database.objects.RegionObject;
+import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
  * @author horodysk
@@ -18,19 +25,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "VisitedCountryDataBase";
-
-    // Contacts table name
-    private static final String TABLE_NAME = "Visited";
-
-    // Contacts Table Columns names
-    private static final String KEY_ID = "id";
-
-    private static final String KEY_NAME = "name";
-
-    private static final String KEY_YEAR = "year";
-
-    private static final String KEY_MONTH = "month";
+    private static final String DATABASE_NAME = "CountriesYouVisitedDB";
 
     /***/
     public DataBaseHandler(Context context) {
@@ -38,123 +33,122 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(getDiaryPagesCreateTableSQL());
-    }
-
-    private String getDiaryPagesCreateTableSQL() {
-        return "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_YEAR + " TEXT," + KEY_MONTH +
-            " TEXT" + ")";
-    }
-
-    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + ContinentDataBaseHandler.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CountryDataBaseHandler.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + RegionDataBaseHandler.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + VisitedDataBaseHandler.TABLE_NAME);
 
         // Create tables again
         onCreate(db);
     }
 
-    /**
-     * Adding new page
-     */
-    public void addVisitedCountry(CountryObject country) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, country.getName());
-        values.put(KEY_YEAR, country.getYear());
-        values.put(KEY_MONTH, country.getMonth());
-
-        // Inserting Row
-        db.insert(TABLE_NAME, null, values);
-        db.close(); // Closing database connection
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(ContinentDataBaseHandler.getCreateSQL());
+        db.execSQL(CountryDataBaseHandler.getCreateSQL());
+        db.execSQL(RegionDataBaseHandler.getCreateSQL());
+        db.execSQL(VisitedDataBaseHandler.getCreateSQL());
     }
 
-    /**
-     * Getting single page
-     */
-    public CountryObject getVisitedCountry(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    // CONTINENTS
 
-        CountryObject page = new CountryObject(id, "", 0, 0);
+    /***/
+    public List<ContinentObject> getAllContinents() {
+        return ContinentDataBaseHandler.getAll(this.getWritableDatabase());
+    }
 
-        Cursor cursor = db.query(TABLE_NAME, new String[] { KEY_ID, KEY_NAME, KEY_YEAR }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null,
-            null, null, null);
+    /***/
+    public List<String> getAllContinentsName() {
+        List<String> names = new ArrayList<String>();
+        List<ContinentObject> objects = ContinentDataBaseHandler.getAll(this.getWritableDatabase());
 
-        if (cursor != null) {
-            cursor.moveToFirst();
-
-            if (cursor.getCount() > 0) {
-                page.setName(cursor.getString(1));
-                page.setYear(Integer.parseInt(cursor.getString(2)));
-                page.setMonth(Integer.parseInt(cursor.getString(2)));
-            }
-            else {
-                addVisitedCountry(page);
-            }
+        for (ContinentObject ob : objects) {
+            names.add(ob.getName());
         }
-
-        return page;
+        return names;
     }
 
+    /***/
+    public ContinentObject getContinent(int id) {
+        return ContinentDataBaseHandler.get(id, this.getWritableDatabase());
+    }
+
+    // COUNTRIES
+
     /**
-     * Getting all pages
+     * Return all countries placed on selected continent
      */
-    public List<CountryObject> getAllVisitedCountries() {
-        List<CountryObject> diary = new ArrayList<CountryObject>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+    public List<CountryObject> getAllCountries(int id) {
+        return CountryDataBaseHandler.getAll(id, this.getWritableDatabase());
+    }
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+    /***/
+    public List<String> getAllCountriesName(String name) {
+        List<String> names = new ArrayList<String>();
+        List<CountryObject> objects = CountryDataBaseHandler.getAll(name, this.getWritableDatabase());
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                CountryObject page = new CountryObject(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor
-                    .getString(2)), Integer.parseInt(cursor.getString(3)));
-                diary.add(page);
-            }
-            while (cursor.moveToNext());
+        for (CountryObject ob : objects) {
+            names.add(ob.getName());
         }
-
-        return diary;
+        return names;
     }
 
-    /**
-     * Getting pages count
-     */
-    public int getVisitedCountryCount() {
-        String countQuery = "SELECT * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-
-        return cursor.getCount();
+    /***/
+    public CountryObject getCountry(int id) {
+        return CountryDataBaseHandler.get(id, this.getWritableDatabase());
     }
 
+    // REGIONS
+
     /**
-     * Updating single country
+     * Return all regions placed on selected country
      */
-    public int updateVisitedCountry(CountryObject country) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, country.getName());
-        values.put(KEY_YEAR, country.getYear());
-        values.put(KEY_MONTH, country.getMonth());
-
-        // updating row
-        return db.update(TABLE_NAME, values, KEY_ID + " = ?", new String[] { String.valueOf(country.getId()) });
+    public List<RegionObject> getAllRegions(int id) {
+        return RegionDataBaseHandler.getAll(id, this.getWritableDatabase());
     }
 
-    /**
-     * Deleting single country
-     */
-    public void deleteVisitedCountry(CountryObject country) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, KEY_ID + " = ?", new String[] { String.valueOf(country.getId()) });
-        db.close();
+    /***/
+    public List<String> getAllRegionsName(String name) {
+        List<String> names = new ArrayList<String>();
+        List<RegionObject> objects = RegionDataBaseHandler.getAll(name, this.getWritableDatabase());
+
+        for (RegionObject ob : objects) {
+            names.add(ob.getName());
+        }
+        return names;
+    }
+
+    /***/
+    public RegionObject getRegion(int id) {
+        return RegionDataBaseHandler.get(id, this.getWritableDatabase());
+    }
+
+    /***/
+    public RegionObject getRegion(String name) {
+        return RegionDataBaseHandler.get(name, this.getWritableDatabase());
+    }
+
+    // VISITED REGIONS
+
+    /***/
+    public void addVisitedRegion(VisitedRegionObject object) {
+        VisitedDataBaseHandler.addVisitedCountry(object, this.getWritableDatabase());
+    }
+
+    /***/
+    public List<VisitedRegionObject> getAllVisitedRegions() {
+        return VisitedDataBaseHandler.getAll(this.getWritableDatabase());
+    }
+
+    /***/
+    public int getVisitedRegionCount() {
+        return VisitedDataBaseHandler.getCount(this.getWritableDatabase());
+    }
+
+    /***/
+    public void deleteVisitedRegion(VisitedRegionObject object) {
+        VisitedDataBaseHandler.delete(object.getId(), this.getWritableDatabase());
     }
 }

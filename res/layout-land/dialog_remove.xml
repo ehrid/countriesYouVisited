@@ -10,7 +10,7 @@
         android:layout_marginLeft="5sp"
         android:background="@drawable/button_unactive"
         android:gravity="center"
-        android:text="NO ADDED COUNTRIES"
+        android:text="NO ADDED REGIONS"
         android:textColor="@color/text_red"
         android:textSize="20sp"
         android:visibility="invisible" />

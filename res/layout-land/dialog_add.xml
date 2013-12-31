@@ -1,43 +1,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:gravity="center_horizontal">
-
-    <Spinner
-        android:id="@+id/add_name"
-        android:layout_width="@dimen/menu_button_width"
-        android:layout_height="@dimen/menu_button_height"
-        android:entries="@array/country_arrays"
-        android:prompt="@string/country_prompt" 
-        android:background="@drawable/spinner"
-        android:paddingLeft="5sp"/>
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="100sp" 
-        android:layout_margin="5sp">
-        
-        <com.countriesyouvisited.wheel.WheelView 
-        android:id="@+id/add_months"
-        android:layout_width="120sp"
-        android:layout_height="match_parent"/>
-    
-    <com.countriesyouvisited.wheel.WheelView 
-        android:id="@+id/add_years"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-    
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/add_continent"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_margin="5sp"
+            android:background="@drawable/spinner"
+            android:prompt="@string/continent_prompt" />
+
+        <Spinner
+            android:id="@+id/add_country"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_margin="5sp"
+            android:background="@drawable/spinner"
+            android:prompt="@string/country_prompt" />
+
+        <Spinner
+            android:id="@+id/add_region"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_margin="5sp"
+            android:background="@drawable/spinner"
+            android:prompt="@string/region_prompt" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="@dimen/menu_button_width"
-        android:layout_height="@dimen/menu_button_height"
-        android:layout_margin="@dimen/menu_button_margins"
-        android:background="@drawable/style_button"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/menu_button_text_size"
-        android:text="@string/menu_add" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="90sp"
+            android:layout_margin="5sp" >
+
+            <com.countriesyouvisited.wheel.WheelView
+                android:id="@+id/add_months"
+                android:layout_width="120sp"
+                android:layout_height="match_parent" />
+
+            <com.countriesyouvisited.wheel.WheelView
+                android:id="@+id/add_years"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_margin="5sp"
+            android:background="@drawable/style_button"
+            android:text="@string/menu_add"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/menu_button_text_size" />
+    </LinearLayout>
 
 </LinearLayout>

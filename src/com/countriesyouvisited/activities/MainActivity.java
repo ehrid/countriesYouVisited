@@ -14,8 +14,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 
 import com.countriesyouvisited.R;
-import com.countriesyouvisited.database.CountryObject;
 import com.countriesyouvisited.database.DataBaseHandler;
+import com.countriesyouvisited.database.objects.VisitedRegionObject;
 import com.countriesyouvisited.dialog.AddDialog;
 import com.countriesyouvisited.dialog.ExitDialogNotyfication;
 import com.countriesyouvisited.dialog.PlanDialog;
@@ -77,11 +77,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
     private void addScratchMap() {
         _db = new DataBaseHandler(this);
-        List<CountryObject> visited = _db.getAllVisitedCountries();
+        List<VisitedRegionObject> visited = _db.getAllVisitedRegions();
         addFullMap(visited);
     }
 
-    private void addFullMap(List<CountryObject> visited) {
+    private void addFullMap(List<VisitedRegionObject> visited) {
         ImageView map = new ScratchMapImageView(this, visited);
         map.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         map.setScaleType(ScaleType.MATRIX);

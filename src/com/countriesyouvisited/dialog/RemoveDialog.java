@@ -18,8 +18,8 @@ import android.widget.Toast;
 import com.countriesyouvisited.R;
 import com.countriesyouvisited.activities.DialogActivity;
 import com.countriesyouvisited.database.CountryListViewAdapter;
-import com.countriesyouvisited.database.CountryObject;
 import com.countriesyouvisited.database.DataBaseHandler;
+import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
  * @author horodysk
@@ -34,7 +34,7 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
     private DataBaseHandler _db;
 
-    private List<CountryObject> _items = new ArrayList<CountryObject>();
+    private List<VisitedRegionObject> _items = new ArrayList<VisitedRegionObject>();
 
     @Override
     protected void onCreateDialog(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
         _container.setOnItemClickListener(this);
 
         _db = new DataBaseHandler(this);
-        _items = _db.getAllVisitedCountries();
+        _items = _db.getAllVisitedRegions();
         Collections.sort(_items, new CountryObjectComparator());
 
         _noItems = (TextView) inflated.findViewById(R.id.remove_no_items);
@@ -90,14 +90,14 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
     /***/
     public void removeCountry(int position) {
-        CountryObject country = _items.remove(position);
+        VisitedRegionObject visitedRegion = _items.remove(position);
         _adapter.notifyDataSetChanged();
 
-        _db.deleteVisitedCountry(country);
+        _db.deleteVisitedRegion(visitedRegion);
 
         displayDialogIfNoItems();
 
-        String message = position + "/" + _items.size() + " Country " + country.getName() + " (" + country.getYear() + "/" + country.getMonth() +
+        String message = position + "/" + _items.size() + " Region " + visitedRegion.getRegion(_db).getName() + " (" + visitedRegion.getDate() +
             ") removed";
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
@@ -106,18 +106,19 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
     /**
      * @author horodysk
      */
-    private class CountryObjectComparator implements Comparator<CountryObject> {
+    private class CountryObjectComparator implements Comparator<VisitedRegionObject> {
 
         public CountryObjectComparator() {
             // not needed
         }
 
+        // TODO replace sorting to sorting by column
+
         @Override
-        public int compare(CountryObject o1, CountryObject o2) {
+        public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
             int yearCompare = Integer.toString(o2.getYear()).compareTo(Integer.toString(o1.getYear()));
             int monthCompare = Integer.toString(o2.getMonth()).compareTo(Integer.toString(o1.getMonth()));
-            int nameCompare = o2.getName().compareTo(o1.getName());
-            return yearCompare == 0 ? (monthCompare == 0 ? nameCompare : monthCompare) : yearCompare;
+            return yearCompare == 0 ? monthCompare : yearCompare;
         }
     }
 

@@ -12,22 +12,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.countriesyouvisited.R;
+import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
  * @author horodysk
  */
-public class CountryListViewAdapter extends ArrayAdapter<CountryObject> {
+public class CountryListViewAdapter extends ArrayAdapter<VisitedRegionObject> {
 
     private int _resource;
 
     /***/
-    public CountryListViewAdapter(Context context, int resource, List<CountryObject> items) {
+    public CountryListViewAdapter(Context context, int resource, List<VisitedRegionObject> items) {
         super(context, resource, items);
         _resource = resource;
     }
 
     /***/
-    public CountryObject getEvent(int position) {
+    public VisitedRegionObject getEvent(int position) {
         return getItem(position);
     }
 
@@ -55,13 +56,13 @@ public class CountryListViewAdapter extends ArrayAdapter<CountryObject> {
     }
 
     private void initializeVIewItems(int position, LinearLayout inventoryItemView) {
-        CountryObject item = getItem(position);
+        VisitedRegionObject item = getItem(position);
 
         TextView date = (TextView) inventoryItemView.findViewById(R.id.remove_item_date);
         TextView name = (TextView) inventoryItemView.findViewById(R.id.remove_item_name);
 
-        date.setText(item.getYear() + "/" + item.getMonth());
-        name.setText(item.getName());
+        date.setText(item.getDate());
+        name.setText("region name"); // TODO get region name
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/YouRookMarbelous.ttf");
         date.setTypeface(font);
