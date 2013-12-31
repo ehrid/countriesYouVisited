@@ -38,7 +38,7 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
     }
 
     private Bitmap getOverlayedMap(List<VisitedRegionObject> visited) {
-        Bitmap worldmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.map_full);
+        Bitmap worldmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap);
         Bitmap map = Bitmap.createBitmap(worldmap.getWidth(), worldmap.getHeight(), worldmap.getConfig());
 
         Canvas canvas = new Canvas(map);
