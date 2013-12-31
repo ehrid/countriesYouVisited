@@ -14,12 +14,58 @@
         android:textColor="@color/text_red"
         android:textSize="20sp"
         android:visibility="invisible" />
+    
+    <LinearLayout
+        android:id="@+id/remove_list_labels"
+        android:layout_width="400sp"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+        
+        <Button
+            android:id="@+id/remove_sort_continent"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/menu_button_height"
+            android:background="@drawable/style_button"
+            android:text="Continent"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/menu_button_text_size" />
+        
+        <Button
+            android:id="@+id/remove_sort_country"
+            android:layout_width="99dp"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_marginLeft="1sp"
+            android:background="@drawable/style_button"
+            android:text="Country"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/menu_button_text_size" />
+        
+        <Button
+            android:id="@+id/remove_sort_region"
+            android:layout_width="99dp"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_marginLeft="1sp"
+            android:background="@drawable/style_button"
+            android:text="Region"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/menu_button_text_size" />
+        
+        <Button
+            android:id="@+id/remove_sort_date"
+            android:layout_width="99dp"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_marginLeft="1sp"
+            android:background="@drawable/style_button"
+            android:text="Date"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/menu_button_text_size" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/remove_list"
-        android:layout_width="250sp"
+        android:layout_width="400sp"
         android:layout_height="200sp"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/remove_list_labels"
         android:clickable="true"
         android:divider="@null"
         android:dividerHeight="0dp"

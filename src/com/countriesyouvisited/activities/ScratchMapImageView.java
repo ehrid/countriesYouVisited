@@ -1,5 +1,6 @@
 package com.countriesyouvisited.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -27,7 +28,17 @@ import com.countriesyouvisited.database.objects.VisitedRegionObject;
  */
 public class ScratchMapImageView extends ImageView implements OnTouchListener {
 
-    private static final int _hiddenColor = Color.GRAY;
+    private static final int _SCRATCH_COLOR = Color.GRAY;
+
+    private static final int IMAGE_MAX_SIZE = 4000;
+
+    /***/
+    public ScratchMapImageView(Context context) {
+        super(context);
+        this.setOnTouchListener(this);
+
+        setImageBitmap(getOverlayedMap(new ArrayList<VisitedRegionObject>()));
+    }
 
     /***/
     public ScratchMapImageView(Context context, List<VisitedRegionObject> visited) {
@@ -38,7 +49,7 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
     }
 
     private Bitmap getOverlayedMap(List<VisitedRegionObject> visited) {
-        Bitmap worldmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap);
+        Bitmap worldmap = decodeWorldMap();
         Bitmap map = Bitmap.createBitmap(worldmap.getWidth(), worldmap.getHeight(), worldmap.getConfig());
 
         Canvas canvas = new Canvas(map);
@@ -56,11 +67,32 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
             path.close();
 
             Paint p = new Paint();
-            p.setColor(_hiddenColor);
+            p.setColor(_SCRATCH_COLOR);
 
             canvas.drawPath(path, p);
         }
         return map;
+    }
+
+    private Bitmap decodeWorldMap() {
+        Bitmap b = null;
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap, o);
+
+        int scale = 1;
+        if (o.outHeight > IMAGE_MAX_SIZE || o.outWidth > IMAGE_MAX_SIZE) {
+            scale = (int) Math.pow(2, (int) Math.round(Math.log(IMAGE_MAX_SIZE / (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        b = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap, o2);
+
+        return b;
     }
 
     @Override

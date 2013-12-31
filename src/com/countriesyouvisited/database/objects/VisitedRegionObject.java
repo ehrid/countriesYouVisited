@@ -49,6 +49,16 @@ public class VisitedRegionObject {
     }
 
     /***/
+    public CountryObject getCountry(DataBaseHandler db) {
+        return getRegion(db).getCountry(db);
+    }
+
+    /***/
+    public ContinentObject getContinent(DataBaseHandler db) {
+        return getCountry(db).getContinent(db);
+    }
+
+    /***/
     public void setRegion(int region) {
         _region = region;
     }

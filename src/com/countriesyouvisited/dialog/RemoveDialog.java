@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +31,17 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
     private ListView _container;
 
+    private Button _sortByContinent;
+
+    private Button _sortByCountry;
+
+    private Button _sortByRegion;
+
+    private Button _sortByDate;
+
     private CountryListViewAdapter _adapter;
 
-    private DataBaseHandler _db;
+    DataBaseHandler _db;
 
     private List<VisitedRegionObject> _items = new ArrayList<VisitedRegionObject>();
 
@@ -67,9 +76,19 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         _db = new DataBaseHandler(this);
         _items = _db.getAllVisitedRegions();
-        Collections.sort(_items, new CountryObjectComparator());
+        Collections.sort(_items, new DateComaprator());
 
         _noItems = (TextView) inflated.findViewById(R.id.remove_no_items);
+
+        _sortByContinent = (Button) inflated.findViewById(R.id.remove_sort_continent);
+        _sortByCountry = (Button) inflated.findViewById(R.id.remove_sort_country);
+        _sortByRegion = (Button) inflated.findViewById(R.id.remove_sort_region);
+        _sortByDate = (Button) inflated.findViewById(R.id.remove_sort_date);
+
+        _sortByContinent.setOnClickListener(this);
+        _sortByCountry.setOnClickListener(this);
+        _sortByRegion.setOnClickListener(this);
+        _sortByDate.setOnClickListener(this);
     }
 
     private void setContainerAdapter() {
@@ -79,7 +98,24 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
     @Override
     protected void onClickAction(View v) {
-        //
+        switch (v.getId()) {
+            case R.id.remove_sort_continent:
+                _adapter.sort(new ContinentComaprator());
+                _adapter.notifyDataSetChanged();
+                break;
+            case R.id.remove_sort_country:
+                _adapter.sort(new CountryComaprator());
+                _adapter.notifyDataSetChanged();
+                break;
+            case R.id.remove_sort_region:
+                _adapter.sort(new RegionComaprator());
+                _adapter.notifyDataSetChanged();
+                break;
+            case R.id.remove_sort_date:
+                _adapter.sort(new DateComaprator());
+                _adapter.notifyDataSetChanged();
+                break;
+        }
     }
 
     @Override
@@ -106,13 +142,56 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
     /**
      * @author horodysk
      */
-    private class CountryObjectComparator implements Comparator<VisitedRegionObject> {
+    private class ContinentComaprator implements Comparator<VisitedRegionObject> {
 
-        public CountryObjectComparator() {
+        public ContinentComaprator() {
             // not needed
         }
 
-        // TODO replace sorting to sorting by column
+        @Override
+        public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
+            return o2.getContinent(_db).getName().compareTo(o1.getContinent(_db).getName());
+        }
+    }
+
+    /**
+     * @author horodysk
+     */
+    private class CountryComaprator implements Comparator<VisitedRegionObject> {
+
+        public CountryComaprator() {
+            // not needed
+        }
+
+        @Override
+        public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
+            return o2.getCountry(_db).getName().compareTo(o1.getCountry(_db).getName());
+        }
+    }
+
+    /**
+     * @author horodysk
+     */
+    private class RegionComaprator implements Comparator<VisitedRegionObject> {
+
+        public RegionComaprator() {
+            // not needed
+        }
+
+        @Override
+        public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
+            return o2.getRegion(_db).getName().compareTo(o1.getRegion(_db).getName());
+        }
+    }
+
+    /**
+     * @author horodysk
+     */
+    private class DateComaprator implements Comparator<VisitedRegionObject> {
+
+        public DateComaprator() {
+            // not needed
+        }
 
         @Override
         public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {

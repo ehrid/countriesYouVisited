@@ -59,14 +59,18 @@ public class CountryListViewAdapter extends ArrayAdapter<VisitedRegionObject> {
         VisitedRegionObject item = getItem(position);
 
         TextView date = (TextView) inventoryItemView.findViewById(R.id.remove_item_date);
-        TextView name = (TextView) inventoryItemView.findViewById(R.id.remove_item_name);
+        TextView continent = (TextView) inventoryItemView.findViewById(R.id.remove_item_continent);
+        TextView country = (TextView) inventoryItemView.findViewById(R.id.remove_item_country);
+        TextView region = (TextView) inventoryItemView.findViewById(R.id.remove_item_region);
 
         date.setText(item.getDate());
-        name.setText("region name"); // TODO get region name
+        continent.setText("continent name"); // TODO get continent name
+        country.setText("country name"); // TODO get country name
+        region.setText("region name"); // TODO get region name
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/YouRookMarbelous.ttf");
         date.setTypeface(font);
-        name.setTypeface(font);
+        region.setTypeface(font);
 
     }
 
