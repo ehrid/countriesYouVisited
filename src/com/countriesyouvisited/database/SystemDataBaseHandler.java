@@ -94,6 +94,11 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
         return ContinentDataBaseHandler.get(id, getWritableDatabase());
     }
 
+    /***/
+    public ContinentObject getContinent(String name) {
+        return ContinentDataBaseHandler.get(name, getWritableDatabase());
+    }
+
     // COUNTRIES
 
     /**
@@ -105,9 +110,10 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
 
     /***/
     public List<String> getAllCountriesName(String name) {
-        List<String> names = new ArrayList<String>();
-        List<CountryObject> objects = CountryDataBaseHandler.getAll(name, getWritableDatabase());
+        int id = getContinent(name).getId();
+        List<CountryObject> objects = CountryDataBaseHandler.getAll(id, getWritableDatabase());
 
+        List<String> names = new ArrayList<String>();
         for (CountryObject ob : objects) {
             names.add(ob.getName());
         }
@@ -117,6 +123,11 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     /***/
     public CountryObject getCountry(int id) {
         return CountryDataBaseHandler.get(id, getWritableDatabase());
+    }
+
+    /***/
+    public CountryObject getCountry(String name) {
+        return CountryDataBaseHandler.get(name, getWritableDatabase());
     }
 
     // REGIONS
@@ -130,9 +141,10 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
 
     /***/
     public List<String> getAllRegionsName(String name) {
-        List<String> names = new ArrayList<String>();
-        List<RegionObject> objects = RegionDataBaseHandler.getAll(name, getWritableDatabase());
+        int id = getCountry(name).getId();
+        List<RegionObject> objects = RegionDataBaseHandler.getAll(id, getWritableDatabase());
 
+        List<String> names = new ArrayList<String>();
         for (RegionObject ob : objects) {
             names.add(ob.getName());
         }

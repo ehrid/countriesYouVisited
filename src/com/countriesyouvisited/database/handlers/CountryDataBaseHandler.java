@@ -38,18 +38,6 @@ public class CountryDataBaseHandler {
         return getAll(continentList, cursor);
     }
 
-    /***/
-    public static List<CountryObject> getAll(String name, SQLiteDatabase db) {
-        List<CountryObject> continentList = new ArrayList<CountryObject>();
-
-        String[] keys = new String[] { KEY_ID, KEY_NAME, KEY_PARENT };
-        String where = KEY_NAME + "=?";
-        String[] whatValue = new String[] { name };
-        Cursor cursor = db.query(TABLE_NAME, keys, where, whatValue, null, null, null, null);
-
-        return getAll(continentList, cursor);
-    }
-
     private static List<CountryObject> getAll(List<CountryObject> continentList, Cursor cursor) {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -73,13 +61,28 @@ public class CountryDataBaseHandler {
         String[] whatValue = new String[] { String.valueOf(id) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
 
+        return get(cursor);
+    }
+
+    /***/
+    public static CountryObject get(String name, SQLiteDatabase db) {
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT };
+        String where = KEY_NAME + "=?";
+        String[] whatValue = new String[] { name };
+        Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
+
+        return get(cursor);
+    }
+
+    private static CountryObject get(Cursor cursor) {
         if (cursor != null) {
             cursor.moveToFirst();
 
             if (cursor.getCount() > 0) {
+                int idValue = Integer.parseInt(cursor.getString(0));
                 String nameValue = cursor.getString(1);
                 int parentValue = Integer.parseInt(cursor.getString(2));
-                return new CountryObject(id, nameValue, parentValue);
+                return new CountryObject(idValue, nameValue, parentValue);
             }
         }
 

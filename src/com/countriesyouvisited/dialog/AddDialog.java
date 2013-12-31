@@ -174,8 +174,10 @@ public class AddDialog extends DialogActivity implements OnItemSelectedListener 
     @Override
     public void onItemSelected(AdapterView<?> parentView, View arg1, int arg2, long arg3) {
         TextView childAt = (TextView) parentView.getChildAt(0);
-        childAt.setTextColor(Color.WHITE);
-        childAt.setTypeface(_font);
+        if (childAt != null) {
+            childAt.setTextColor(Color.WHITE);
+            childAt.setTypeface(_font);
+        }
 
         switch (parentView.getId()) {
             case R.id.add_continent:
@@ -187,6 +189,7 @@ public class AddDialog extends DialogActivity implements OnItemSelectedListener 
                 setRegionContent();
                 break;
         }
+
     }
 
     @Override

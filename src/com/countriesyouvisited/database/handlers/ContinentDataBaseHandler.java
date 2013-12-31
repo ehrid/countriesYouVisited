@@ -51,12 +51,27 @@ public class ContinentDataBaseHandler {
         String[] whatValue = new String[] { String.valueOf(id) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
 
+        return get(cursor);
+    }
+
+    /***/
+    public static ContinentObject get(String name, SQLiteDatabase db) {
+        String[] values = new String[] { KEY_ID, KEY_NAME };
+        String where = KEY_NAME + "=?";
+        String[] whatValue = new String[] { name };
+        Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
+
+        return get(cursor);
+    }
+
+    private static ContinentObject get(Cursor cursor) {
         if (cursor != null) {
             cursor.moveToFirst();
 
             if (cursor.getCount() > 0) {
+                int idValue = Integer.parseInt(cursor.getString(0));
                 String nameValue = cursor.getString(1);
-                return new ContinentObject(id, nameValue);
+                return new ContinentObject(idValue, nameValue);
             }
         }
 

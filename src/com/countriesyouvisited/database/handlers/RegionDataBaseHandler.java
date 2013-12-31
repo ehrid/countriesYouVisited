@@ -43,18 +43,6 @@ public class RegionDataBaseHandler {
         return getAll(continentList, cursor);
     }
 
-    /***/
-    public static List<RegionObject> getAll(String name, SQLiteDatabase db) {
-        List<RegionObject> continentList = new ArrayList<RegionObject>();
-
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
-        String where = KEY_NAME + "=?";
-        String[] whatValue = new String[] { name };
-        Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
-
-        return getAll(continentList, cursor);
-    }
-
     private static List<RegionObject> getAll(List<RegionObject> continentList, Cursor cursor) {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
