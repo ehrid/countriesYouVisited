@@ -21,7 +21,7 @@ public class ContinentDataBaseHandler {
 
     /***/
     public static String getCreateSQL() {
-        return "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT)";
+        return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT)";
     }
 
     /***/

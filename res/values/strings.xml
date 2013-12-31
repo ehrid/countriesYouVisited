@@ -8,7 +8,7 @@
     <string name="menu_add">ADD COUNTRY</string>
 
     <!-- Countries -->
-    <string name="continent_prompt">Country group</string>
+    <string name="continent_prompt">Territory</string>
     <string name="country_prompt">Country</string>
     <string name="region_prompt">Region</string>
 

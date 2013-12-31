@@ -26,8 +26,8 @@ public class VisitedDataBaseHandler {
 
     /***/
     public static String getCreateSQL() {
-        return "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_RELATED + " INTEGER," + KEY_YEAR + " INTEGER," +
-            KEY_MONTH + " INTEGER)";
+        return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_RELATED + " INTEGER," + KEY_YEAR +
+            " INTEGER," + KEY_MONTH + " INTEGER)";
     }
 
     /**
