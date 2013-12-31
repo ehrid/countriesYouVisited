@@ -1,11 +1,16 @@
 package com.countriesyouvisited.database;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.countriesyouvisited.database.handlers.ContinentDataBaseHandler;
 import com.countriesyouvisited.database.handlers.CountryDataBaseHandler;
@@ -20,14 +25,17 @@ import com.countriesyouvisited.database.objects.RegionObject;
 public class SystemDataBaseHandler extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "CountriesYouVisitedSystemData";
 
+    private Context _context;
+
     /***/
     public SystemDataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        _context = context;
     }
 
     @Override
@@ -40,9 +48,27 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ContinentDataBaseHandler.getCreateSQL());
-        db.execSQL(CountryDataBaseHandler.getCreateSQL());
-        db.execSQL(RegionDataBaseHandler.getCreateSQL());
+        createSystemDatabase(db);
+    }
+
+    private void createSystemDatabase(SQLiteDatabase db) {
+        try {
+            InputStream input = _context.getAssets().open("database/CountriesYouVisitedSystemData.sql");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(input));
+            String str;
+
+            while ((str = in.readLine()) != null) {
+                db.execSQL(str);
+                Log.d("DATABASE ADDED", str);
+            }
+
+            in.close();
+        }
+        catch (IOException e) {
+            Log.d("CountriesYouVisitedSystemData", e.getMessage());
+        }
+
     }
 
     // CONTINENTS
