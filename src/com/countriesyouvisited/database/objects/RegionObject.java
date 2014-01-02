@@ -1,6 +1,8 @@
 package com.countriesyouvisited.database.objects;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import android.util.Pair;
 
@@ -51,8 +53,23 @@ public class RegionObject {
 
     /***/
     public List<Pair<Integer, Integer>> getRegionPoints() {
-        // TODO add translation of string points to list of points
-        return null;
+        List<Pair<Integer, Integer>> pairs = new ArrayList<Pair<Integer, Integer>>();
+
+        if (_regionPoints != null) {
+
+            String decodedPoints = _regionPoints.replaceAll("\\D", " ");
+            Scanner in = new Scanner(decodedPoints);
+
+            while (in.hasNext()) {
+                int x = in.nextInt();
+                if (in.hasNext()) {
+                    int y = in.nextInt();
+                    pairs.add(new Pair<Integer, Integer>(x, y));
+                }
+            }
+        }
+
+        return pairs;
     }
 
 }

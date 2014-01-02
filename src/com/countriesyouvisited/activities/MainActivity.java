@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 
@@ -41,6 +40,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
     private DataBaseHandler _db;
 
+    private ScratchMapImageView _map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         initializeItems();
         setListeners();
+        addScratchMap();
     }
 
     private void initializeItems() {
@@ -68,13 +70,6 @@ public class MainActivity extends Activity implements OnClickListener {
         _exit.setOnClickListener(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        _container.removeAllViews();
-        addScratchMap();
-    }
-
     private void addScratchMap() {
         _db = new DataBaseHandler(this);
         List<VisitedRegionObject> visited = _db.getAllVisitedRegions();
@@ -82,10 +77,21 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     private void addFullMap(List<VisitedRegionObject> visited) {
-        ImageView map = new ScratchMapImageView(this, visited);
-        map.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        map.setScaleType(ScaleType.MATRIX);
-        _container.addView(map);
+        _map = new ScratchMapImageView(this, visited);
+        _map.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        _map.setScaleType(ScaleType.MATRIX);
+        _container.addView(_map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshMap();
+    }
+
+    private void refreshMap() {
+        List<VisitedRegionObject> visited = _db.getAllVisitedRegions();
+        _map.refreshImage(visited);
     }
 
     @Override

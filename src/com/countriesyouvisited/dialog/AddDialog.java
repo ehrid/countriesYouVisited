@@ -104,21 +104,21 @@ public class AddDialog extends DialogActivity implements OnItemSelectedListener 
 
     private void setContinentContent() {
         List<String> names = _db.getAllContinentsName();
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names);
         _continent.setAdapter(spinnerArrayAdapter);
     }
 
     private void setCountryContent() {
         Spinner spinner = _continent;
         List<String> names = _db.getAllCountriesName(getName(spinner));
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names);
         _country.setAdapter(spinnerArrayAdapter);
     }
 
     private void setRegionContent() {
         Spinner spinner = _country;
         List<String> names = _db.getAllRegionsName(getName(spinner));
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names);
         _region.setAdapter(spinnerArrayAdapter);
     }
 

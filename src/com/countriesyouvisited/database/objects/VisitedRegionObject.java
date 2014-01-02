@@ -26,7 +26,7 @@ public class VisitedRegionObject {
     public VisitedRegionObject(int region, int month, int year) {
         _id = 0;
         _region = region;
-        _month = month;
+        _month = month + 1;
         _year = year;
     }
 

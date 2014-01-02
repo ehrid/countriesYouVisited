@@ -21,10 +21,13 @@ public class CountryListViewAdapter extends ArrayAdapter<VisitedRegionObject> {
 
     private int _resource;
 
+    private DataBaseHandler _db;
+
     /***/
     public CountryListViewAdapter(Context context, int resource, List<VisitedRegionObject> items) {
         super(context, resource, items);
         _resource = resource;
+        _db = new DataBaseHandler(context);
     }
 
     /***/
@@ -64,12 +67,14 @@ public class CountryListViewAdapter extends ArrayAdapter<VisitedRegionObject> {
         TextView region = (TextView) inventoryItemView.findViewById(R.id.remove_item_region);
 
         date.setText(item.getDate());
-        continent.setText("continent name"); // TODO get continent name
-        country.setText("country name"); // TODO get country name
-        region.setText("region name"); // TODO get region name
+        continent.setText(item.getContinent(_db).getName());
+        country.setText(item.getCountry(_db).getName());
+        region.setText(item.getRegion(_db).getName());
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/YouRookMarbelous.ttf");
         date.setTypeface(font);
+        continent.setTypeface(font);
+        country.setTypeface(font);
         region.setTypeface(font);
 
     }

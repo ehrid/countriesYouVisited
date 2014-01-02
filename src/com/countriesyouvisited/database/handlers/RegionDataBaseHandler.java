@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.countriesyouvisited.database.objects.RegionObject;
 
@@ -63,7 +64,7 @@ public class RegionDataBaseHandler {
 
     /***/
     public static RegionObject get(int id, SQLiteDatabase db) {
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT };
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
         String where = KEY_ID + "=?";
         String[] whatValue = new String[] { String.valueOf(id) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
@@ -73,7 +74,7 @@ public class RegionDataBaseHandler {
 
     /***/
     public static RegionObject get(String name, SQLiteDatabase db) {
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT };
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
         String where = KEY_NAME + "=?";
         String[] whatValue = new String[] { String.valueOf(name) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
@@ -86,6 +87,7 @@ public class RegionDataBaseHandler {
             cursor.moveToFirst();
 
             if (cursor.getCount() > 0) {
+                Log.d("REGION DB", cursor.getColumnCount() + "");
                 int idValue = Integer.parseInt(cursor.getString(0));
                 String nameValue = cursor.getString(1);
                 int parentValue = Integer.parseInt(cursor.getString(2));

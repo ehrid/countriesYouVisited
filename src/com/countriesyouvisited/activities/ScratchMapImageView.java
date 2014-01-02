@@ -12,15 +12,16 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.FloatMath;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
 import com.countriesyouvisited.R;
+import com.countriesyouvisited.database.DataBaseHandler;
 import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
@@ -30,46 +31,67 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
 
     private static final int _SCRATCH_COLOR = Color.GRAY;
 
-    private static final int IMAGE_MAX_SIZE = 4000;
+    private static final int _IMAGE_MAX_SIZE = 4000;
+
+    private DataBaseHandler _db;
+
+    Bitmap _worldmap;
 
     /***/
     public ScratchMapImageView(Context context) {
         super(context);
-        this.setOnTouchListener(this);
 
-        setImageBitmap(getOverlayedMap(new ArrayList<VisitedRegionObject>()));
+        ArrayList<VisitedRegionObject> visited = new ArrayList<VisitedRegionObject>();
+        initialize(context, visited);
     }
 
     /***/
     public ScratchMapImageView(Context context, List<VisitedRegionObject> visited) {
         super(context);
-        this.setOnTouchListener(this);
 
+        initialize(context, visited);
+    }
+
+    private void initialize(Context context, List<VisitedRegionObject> visited) {
+        setOnTouchListener(this);
+        _worldmap = decodeWorldMap();
+        _db = new DataBaseHandler(context);
         setImageBitmap(getOverlayedMap(visited));
     }
 
+    /***/
+    public void refreshImage(List<VisitedRegionObject> visited) {
+        setImageBitmap(getOverlayedMap(visited));
+        invalidate();
+    }
+
     private Bitmap getOverlayedMap(List<VisitedRegionObject> visited) {
-        Bitmap worldmap = decodeWorldMap();
-        Bitmap map = Bitmap.createBitmap(worldmap.getWidth(), worldmap.getHeight(), worldmap.getConfig());
+        Bitmap map = Bitmap.createBitmap(_worldmap.getWidth(), _worldmap.getHeight(), _worldmap.getConfig());
 
         Canvas canvas = new Canvas(map);
 
-        canvas.drawBitmap(worldmap, new Matrix(), null);
+        canvas.drawBitmap(_worldmap, new Matrix(), null);
 
-        for (VisitedRegionObject country : visited) {
-            int a = country.getMonth() * 10;
+        for (VisitedRegionObject region : visited) {
 
-            Path path = new Path();
-            path.moveTo(a + 160.0f, a + 240.0f);
-            path.lineTo(a + 140.0f, a + 200.0f);
-            path.addArc(new RectF(a + 140, a + 180, a + 180, a + 220), a + -180, a + 180);
-            path.lineTo(a + 160.0f, a + 240.0f);
-            path.close();
+            List<Pair<Integer, Integer>> points = region.getRegion(_db).getRegionPoints();
 
-            Paint p = new Paint();
-            p.setColor(_SCRATCH_COLOR);
+            if (!points.isEmpty()) {
+                Path path = new Path();
 
-            canvas.drawPath(path, p);
+                Pair<Integer, Integer> firstPoint = points.remove(0);
+                path.moveTo(firstPoint.first, firstPoint.second);
+
+                for (Pair<Integer, Integer> point : points) {
+                    path.lineTo(point.first, point.second);
+                }
+
+                path.close();
+                Paint p = new Paint();
+                p.setColor(_SCRATCH_COLOR);
+
+                canvas.drawPath(path, p);
+            }
         }
         return map;
     }
@@ -83,8 +105,8 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
         BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap, o);
 
         int scale = 1;
-        if (o.outHeight > IMAGE_MAX_SIZE || o.outWidth > IMAGE_MAX_SIZE) {
-            scale = (int) Math.pow(2, (int) Math.round(Math.log(IMAGE_MAX_SIZE / (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+        if (o.outHeight > _IMAGE_MAX_SIZE || o.outWidth > _IMAGE_MAX_SIZE) {
+            scale = (int) Math.pow(2, (int) Math.round(Math.log(_IMAGE_MAX_SIZE / (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
         }
 
         // Decode with inSampleSize

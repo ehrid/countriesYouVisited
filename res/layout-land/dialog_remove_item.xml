@@ -1,39 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5sp"
-    android:background="@drawable/button_unactive"
+    android:layout_marginTop="1sp"
     android:gravity="center_vertical" >
 
     <TextView
         android:id="@+id/remove_item_continent"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25sp"
+        android:background="@drawable/button_unactive"
+        android:gravity="center_vertical"
+        android:paddingLeft="2sp"
+        android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/remove_item_country"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25sp"
         android:layout_marginLeft="1sp"
+        android:background="@drawable/button_unactive"
+        android:gravity="center_vertical"
+        android:paddingLeft="2sp"
+        android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/remove_item_region"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25sp"
         android:layout_marginLeft="1sp"
+        android:background="@drawable/button_unactive"
+        android:gravity="center_vertical"
+        android:paddingLeft="2sp"
+        android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/remove_item_date"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25sp"
         android:layout_marginLeft="1sp"
+        android:background="@drawable/button_unactive"
+        android:gravity="center_vertical"
+        android:paddingLeft="2sp"
+        android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     <string name="app_name">Countries You Visited</string>
 
     <!-- Menu -->
-    <string name="menu_add">ADD COUNTRY</string>
+    <string name="menu_add">ADD REGION</string>
 
     <!-- Countries -->
     <string name="continent_prompt">Territory</string>
