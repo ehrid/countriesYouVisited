@@ -1,8 +1,8 @@
 BEGIN TRANSACTION;
-CREATE TABLE Continents (id INTEGER PRIMARY KEY, name TEXT);
-INSERT INTO Continents VALUES(1,'North America');
-INSERT INTO Continents VALUES(2,'Caribbean');
-INSERT INTO Continents VALUES(3,'Central America');
+CREATE TABLE Continents (id INTEGER PRIMARY KEY, name TEXT, file TEXT);
+INSERT INTO Continents VALUES(1,'North America','north_america');
+INSERT INTO Continents VALUES(2,'Caribbean','map_caribbean_central_america');
+INSERT INTO Continents VALUES(3,'Central America','map_caribbean_central_america');
 CREATE TABLE Countries (id INTEGER PRIMARY KEY, name TEXT, continentId NUMERIC);
 INSERT INTO Countries VALUES(1,'Bermuda',1);
 INSERT INTO Countries VALUES(2,'Canada',1);

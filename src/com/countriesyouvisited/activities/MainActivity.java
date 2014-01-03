@@ -4,16 +4,24 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.countriesyouvisited.R;
 import com.countriesyouvisited.database.DataBaseHandler;
+import com.countriesyouvisited.database.objects.ContinentObject;
 import com.countriesyouvisited.database.objects.VisitedRegionObject;
 import com.countriesyouvisited.dialog.AddDialog;
 import com.countriesyouvisited.dialog.ExitDialogNotyfication;
@@ -24,7 +32,7 @@ import com.countriesyouvisited.dialog.StatsDialog;
 /**
  * @author horodysk
  */
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 
     private Button _plan;
 
@@ -42,6 +50,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
     private ScratchMapImageView _map;
 
+    private Spinner _continent;
+
+    private Typeface _font;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +61,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         initializeItems();
         setListeners();
+        setContinentContent();
         addScratchMap();
     }
 
@@ -59,7 +72,12 @@ public class MainActivity extends Activity implements OnClickListener {
         _stats = (Button) findViewById(R.id.button_stats);
         _exit = (Button) findViewById(R.id.button_exit);
 
+        _continent = (Spinner) findViewById(R.id.choose_continent);
+
         _container = (RelativeLayout) findViewById(R.id.map_container);
+
+        _font = Typeface.createFromAsset(getAssets(), "fonts/YouRookMarbelous.ttf");
+        _db = new DataBaseHandler(this);
     }
 
     private void setListeners() {
@@ -68,16 +86,24 @@ public class MainActivity extends Activity implements OnClickListener {
         _remove.setOnClickListener(this);
         _stats.setOnClickListener(this);
         _exit.setOnClickListener(this);
+
+        _continent.setOnItemSelectedListener(this);
+    }
+
+    private void setContinentContent() {
+        List<String> names = _db.getAllContinentsName();
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names);
+        _continent.setAdapter(spinnerArrayAdapter);
     }
 
     private void addScratchMap() {
-        _db = new DataBaseHandler(this);
         List<VisitedRegionObject> visited = _db.getAllVisitedRegions();
         addFullMap(visited);
     }
 
     private void addFullMap(List<VisitedRegionObject> visited) {
-        _map = new ScratchMapImageView(this, visited);
+        ContinentObject continent = _db.getContinent((String) _continent.getSelectedItem());
+        _map = new ScratchMapImageView(this, continent.getFile(), visited);
         _map.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         _map.setScaleType(ScaleType.MATRIX);
         _container.addView(_map);
@@ -134,5 +160,22 @@ public class MainActivity extends Activity implements OnClickListener {
     private void startStatsActivity() {
         Intent intent = new Intent(MainActivity.this, StatsDialog.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parentView, View arg1, int arg2, long arg3) {
+        TextView childAt = (TextView) parentView.getChildAt(0);
+        if (childAt != null) {
+            childAt.setTextColor(Color.WHITE);
+            childAt.setTypeface(_font);
+        }
+        _container.removeAllViews();
+        addScratchMap();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+
     }
 }

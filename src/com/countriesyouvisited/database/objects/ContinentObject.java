@@ -8,10 +8,13 @@ public class ContinentObject {
 
     private String _name;
 
+    private String _file;
+
     /***/
-    public ContinentObject(int id, String name) {
+    public ContinentObject(int id, String name, String file) {
         _id = id;
         _name = name;
+        _file = file;
     }
 
     /***/
@@ -22,5 +25,10 @@ public class ContinentObject {
     /***/
     public String getName() {
         return _name;
+    }
+
+    /***/
+    public String getFile() {
+        return _file;
     }
 }

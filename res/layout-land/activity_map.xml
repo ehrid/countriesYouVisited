@@ -18,5 +18,15 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         layout="@layout/activity_map_menu" />
+    
+    <Spinner
+            android:id="@+id/choose_continent"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="@dimen/menu_button_height"
+            android:layout_margin="5sp"
+            android:background="@drawable/spinner"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:prompt="@string/continent_prompt" />
 
 </RelativeLayout>

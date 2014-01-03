@@ -25,7 +25,7 @@ import com.countriesyouvisited.database.objects.RegionObject;
 public class SystemDataBaseHandler extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 9;
 
     // Database Name
     private static final String DATABASE_NAME = "CountriesYouVisitedSystemData";

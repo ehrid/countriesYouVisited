@@ -40,6 +40,11 @@ public class DataBaseHandler {
         return _systemData.getContinent(id);
     }
 
+    /***/
+    public ContinentObject getContinent(String name) {
+        return _systemData.getContinent(name);
+    }
+
     // COUNTRIES
 
     /**

@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
-import com.countriesyouvisited.R;
 import com.countriesyouvisited.database.DataBaseHandler;
 import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
@@ -31,30 +30,30 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
 
     private static final int _SCRATCH_COLOR = Color.GRAY;
 
-    private static final int _IMAGE_MAX_SIZE = 4000;
+    private static final int _IMAGE_MAX_SIZE = 3000;
 
     private DataBaseHandler _db;
 
-    Bitmap _worldmap;
+    Bitmap _world;
 
     /***/
     public ScratchMapImageView(Context context) {
         super(context);
 
         ArrayList<VisitedRegionObject> visited = new ArrayList<VisitedRegionObject>();
-        initialize(context, visited);
+        initialize(context, "north_america", visited);
     }
 
     /***/
-    public ScratchMapImageView(Context context, List<VisitedRegionObject> visited) {
+    public ScratchMapImageView(Context context, String mapName, List<VisitedRegionObject> visited) {
         super(context);
 
-        initialize(context, visited);
+        initialize(context, mapName, visited);
     }
 
-    private void initialize(Context context, List<VisitedRegionObject> visited) {
+    private void initialize(Context context, String mapName, List<VisitedRegionObject> visited) {
         setOnTouchListener(this);
-        _worldmap = decodeWorldMap();
+        _world = decodeMap(mapName);
         _db = new DataBaseHandler(context);
         setImageBitmap(getOverlayedMap(visited));
     }
@@ -66,11 +65,11 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
     }
 
     private Bitmap getOverlayedMap(List<VisitedRegionObject> visited) {
-        Bitmap map = Bitmap.createBitmap(_worldmap.getWidth(), _worldmap.getHeight(), _worldmap.getConfig());
+        Bitmap map = Bitmap.createBitmap(_world.getWidth(), _world.getHeight(), _world.getConfig());
 
         Canvas canvas = new Canvas(map);
 
-        canvas.drawBitmap(_worldmap, new Matrix(), null);
+        canvas.drawBitmap(_world, new Matrix(), null);
 
         for (VisitedRegionObject region : visited) {
 
@@ -96,13 +95,16 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
         return map;
     }
 
-    private Bitmap decodeWorldMap() {
+    private Bitmap decodeMap(String mapName) {
         Bitmap b = null;
 
         // Decode image size
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap, o);
+        int drawableResourceId = getResources().getIdentifier(mapName, "drawable", getContext().getPackageName());
+        BitmapFactory.decodeResource(getContext().getResources(), drawableResourceId, o);
+
+        Log.d("CREATE MAP", mapName + " " + drawableResourceId);
 
         int scale = 1;
         if (o.outHeight > _IMAGE_MAX_SIZE || o.outWidth > _IMAGE_MAX_SIZE) {
@@ -112,7 +114,7 @@ public class ScratchMapImageView extends ImageView implements OnTouchListener {
         // Decode with inSampleSize
         BitmapFactory.Options o2 = new BitmapFactory.Options();
         o2.inSampleSize = scale;
-        b = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.worldmap, o2);
+        b = BitmapFactory.decodeResource(getContext().getResources(), drawableResourceId, o2);
 
         return b;
     }
