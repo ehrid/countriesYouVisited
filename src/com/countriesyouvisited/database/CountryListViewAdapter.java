@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.countriesyouvisited.R;
+import com.countriesyouvisited.database.objects.RegionObject;
 import com.countriesyouvisited.database.objects.VisitedRegionObject;
 
 /**
@@ -67,9 +68,11 @@ public class CountryListViewAdapter extends ArrayAdapter<VisitedRegionObject> {
         TextView region = (TextView) inventoryItemView.findViewById(R.id.remove_item_region);
 
         date.setText(item.getDate());
-        continent.setText(item.getContinent(_db).getName());
-        country.setText(item.getCountry(_db).getName());
-        region.setText(item.getRegion(_db).getName());
+
+        RegionObject regionObject = item.getRegion(_db);
+        continent.setText(regionObject.getContinentName());
+        country.setText(regionObject.getCountryName());
+        region.setText(regionObject.getName());
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/YouRookMarbelous.ttf");
         date.setTypeface(font);

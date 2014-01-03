@@ -133,8 +133,8 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         displayDialogIfNoItems();
 
-        String message = position + "/" + _items.size() + " Region " + visitedRegion.getRegion(_db).getName() + " (" + visitedRegion.getDate() +
-            ") removed";
+        String message = (position + 1) + "/" + (_items.size() + 1) + " region " + visitedRegion.getRegion(_db).getName() + " (" +
+            visitedRegion.getDate() + ") removed";
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
     }
@@ -150,7 +150,7 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         @Override
         public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
-            return o2.getContinent(_db).getName().compareTo(o1.getContinent(_db).getName());
+            return o2.getRegion(_db).getContinentName().compareTo(o1.getRegion(_db).getContinentName());
         }
     }
 
@@ -165,7 +165,7 @@ public class RemoveDialog extends DialogActivity implements OnItemClickListener 
 
         @Override
         public int compare(VisitedRegionObject o1, VisitedRegionObject o2) {
-            return o2.getCountry(_db).getName().compareTo(o1.getCountry(_db).getName());
+            return o2.getRegion(_db).getCountryName().compareTo(o1.getRegion(_db).getCountryName());
         }
     }
 

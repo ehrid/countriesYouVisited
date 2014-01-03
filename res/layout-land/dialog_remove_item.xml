@@ -1,54 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="1sp"
+    android:layout_marginTop="@dimen/remove_list_margin"
     android:gravity="center_vertical" >
 
     <TextView
         android:id="@+id/remove_item_continent"
-        android:layout_width="100dp"
-        android:layout_height="25sp"
+        android:layout_width="@dimen/remove_list_first_width"
+        android:layout_height="@dimen/remove_list_items_width"
         android:background="@drawable/button_unactive"
         android:gravity="center_vertical"
-        android:paddingLeft="2sp"
+        android:paddingLeft="@dimen/remove_list_padding"
         android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/remove_list_items_text_size" />
 
     <TextView
         android:id="@+id/remove_item_country"
-        android:layout_width="99dp"
-        android:layout_height="25sp"
-        android:layout_marginLeft="1sp"
+        android:layout_width="@dimen/remove_list_rest_width"
+        android:layout_height="@dimen/remove_list_items_width"
+        android:layout_marginLeft="@dimen/remove_list_margin"
         android:background="@drawable/button_unactive"
         android:gravity="center_vertical"
-        android:paddingLeft="2sp"
+        android:paddingLeft="@dimen/remove_list_padding"
         android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/remove_list_items_text_size" />
 
     <TextView
         android:id="@+id/remove_item_region"
-        android:layout_width="99dp"
-        android:layout_height="25sp"
-        android:layout_marginLeft="1sp"
+        android:layout_width="@dimen/remove_list_rest_width"
+        android:layout_height="@dimen/remove_list_items_width"
+        android:layout_marginLeft="@dimen/remove_list_margin"
         android:background="@drawable/button_unactive"
         android:gravity="center_vertical"
-        android:paddingLeft="2sp"
+        android:paddingLeft="@dimen/remove_list_padding"
         android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/remove_list_items_text_size" />
 
     <TextView
         android:id="@+id/remove_item_date"
-        android:layout_width="99dp"
-        android:layout_height="25sp"
-        android:layout_marginLeft="1sp"
+        android:layout_width="@dimen/remove_list_rest_width"
+        android:layout_height="@dimen/remove_list_items_width"
+        android:layout_marginLeft="@dimen/remove_list_margin"
         android:background="@drawable/button_unactive"
         android:gravity="center_vertical"
-        android:paddingLeft="2sp"
+        android:paddingLeft="@dimen/remove_list_padding"
         android:singleLine="true"
         android:textColor="@color/text_white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/remove_list_items_text_size" />
 
 </LinearLayout>

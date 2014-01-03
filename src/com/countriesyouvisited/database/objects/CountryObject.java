@@ -1,6 +1,5 @@
 package com.countriesyouvisited.database.objects;
 
-import com.countriesyouvisited.database.DataBaseHandler;
 
 /**
  * @author horodysk
@@ -12,11 +11,14 @@ public class CountryObject {
 
     private int _continent;
 
+    private String _continentName;
+
     /***/
-    public CountryObject(int id, String name, int continent) {
+    public CountryObject(int id, String name, int continent, String continentName) {
         _id = id;
         _name = name;
         _continent = continent;
+        _continentName = continentName;
     }
 
     /***/
@@ -30,7 +32,12 @@ public class CountryObject {
     }
 
     /***/
-    public ContinentObject getContinent(DataBaseHandler db) {
-        return db.getContinent(_continent);
+    public int getContinentId() {
+        return _continent;
+    }
+
+    /***/
+    public String getContinentName() {
+        return _continentName;
     }
 }

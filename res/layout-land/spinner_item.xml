@@ -3,6 +3,7 @@
     style="?android:attr/spinnerDropDownItemStyle"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/spiner_items_higth"
+    android:gravity="center"
     android:ellipsize="marquee"
     android:textAlignment="inherit"/>

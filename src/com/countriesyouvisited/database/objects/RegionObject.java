@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import android.util.Pair;
 
-import com.countriesyouvisited.database.DataBaseHandler;
-
 /**
  * @author horodysk
  */
@@ -22,13 +20,19 @@ public class RegionObject {
 
     private String _regionPoints;
 
+    private String _countryName;
+
+    private String _continentName;
+
     /***/
-    public RegionObject(int id, String name, int country, int surface, String regionPoints) {
+    public RegionObject(int id, String name, int country, int surface, String regionPoints, String countryName, String continentName) {
         _id = id;
         _name = name;
         _country = country;
         _surface = surface;
         _regionPoints = regionPoints;
+        _countryName = countryName;
+        _continentName = continentName;
     }
 
     /***/
@@ -37,13 +41,23 @@ public class RegionObject {
     }
 
     /***/
+    public int getCountryId() {
+        return _country;
+    }
+
+    /***/
     public String getName() {
         return _name;
     }
 
     /***/
-    public CountryObject getCountry(DataBaseHandler db) {
-        return db.getCountry(_country);
+    public String getCountryName() {
+        return _countryName;
+    }
+
+    /***/
+    public String getContinentName() {
+        return _continentName;
     }
 
     /***/

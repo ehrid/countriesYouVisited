@@ -26,7 +26,7 @@ public class VisitedRegionObject {
     public VisitedRegionObject(int region, int month, int year) {
         _id = 0;
         _region = region;
-        _month = month + 1;
+        _month = month;
         _year = year;
     }
 
@@ -46,16 +46,6 @@ public class VisitedRegionObject {
     /***/
     public RegionObject getRegion(DataBaseHandler db) {
         return db.getRegion(_region);
-    }
-
-    /***/
-    public CountryObject getCountry(DataBaseHandler db) {
-        return getRegion(db).getCountry(db);
-    }
-
-    /***/
-    public ContinentObject getContinent(DataBaseHandler db) {
-        return getCountry(db).getContinent(db);
     }
 
     /***/

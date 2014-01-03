@@ -9,7 +9,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.countriesyouvisited.database.handlers.ContinentDataBaseHandler;
@@ -22,38 +21,12 @@ import com.countriesyouvisited.database.objects.RegionObject;
 /**
  * @author horodysk
  */
-public class SystemDataBaseHandler extends SQLiteOpenHelper {
-
-    // Database Version
-    private static final int DATABASE_VERSION = 9;
-
-    // Database Name
-    private static final String DATABASE_NAME = "CountriesYouVisitedSystemData";
-
-    private Context _context;
+public class SystemDataBaseHandler {
 
     /***/
-    public SystemDataBaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        _context = context;
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + ContinentDataBaseHandler.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + CountryDataBaseHandler.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + RegionDataBaseHandler.TABLE_NAME);
-        onCreate(db);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        createSystemDatabase(db);
-    }
-
-    private void createSystemDatabase(SQLiteDatabase db) {
+    public void createSystemDatabase(SQLiteDatabase db, Context context) {
         try {
-            InputStream input = _context.getAssets().open("database/CountriesYouVisitedSystemData.sql");
+            InputStream input = context.getAssets().open("database/CountriesYouVisitedSystemData.sql");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(input));
             String str;
@@ -74,14 +47,14 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     // CONTINENTS
 
     /***/
-    public List<ContinentObject> getAllContinents() {
-        return ContinentDataBaseHandler.getAll(getWritableDatabase());
+    public List<ContinentObject> getAllContinents(SQLiteDatabase db) {
+        return ContinentDataBaseHandler.getAll(db);
     }
 
     /***/
-    public List<String> getAllContinentsName() {
+    public List<String> getAllContinentsName(SQLiteDatabase db) {
         List<String> names = new ArrayList<String>();
-        List<ContinentObject> objects = ContinentDataBaseHandler.getAll(getWritableDatabase());
+        List<ContinentObject> objects = ContinentDataBaseHandler.getAll(db);
 
         for (ContinentObject ob : objects) {
             names.add(ob.getName());
@@ -90,13 +63,13 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     }
 
     /***/
-    public ContinentObject getContinent(int id) {
-        return ContinentDataBaseHandler.get(id, getWritableDatabase());
+    public ContinentObject getContinent(int id, SQLiteDatabase db) {
+        return ContinentDataBaseHandler.get(id, db);
     }
 
     /***/
-    public ContinentObject getContinent(String name) {
-        return ContinentDataBaseHandler.get(name, getWritableDatabase());
+    public ContinentObject getContinent(String name, SQLiteDatabase db) {
+        return ContinentDataBaseHandler.get(name, db);
     }
 
     // COUNTRIES
@@ -104,14 +77,14 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     /**
      * Return all countries placed on selected continent
      */
-    public List<CountryObject> getAllCountries(int id) {
-        return CountryDataBaseHandler.getAll(id, getWritableDatabase());
+    public List<CountryObject> getAllCountries(int id, SQLiteDatabase db) {
+        return CountryDataBaseHandler.getAll(id, db);
     }
 
     /***/
-    public List<String> getAllCountriesName(String name) {
-        int id = getContinent(name).getId();
-        List<CountryObject> objects = CountryDataBaseHandler.getAll(id, getWritableDatabase());
+    public List<String> getAllCountriesName(String name, SQLiteDatabase db) {
+        int id = getContinent(name, db).getId();
+        List<CountryObject> objects = CountryDataBaseHandler.getAll(id, db);
 
         List<String> names = new ArrayList<String>();
         for (CountryObject ob : objects) {
@@ -121,13 +94,13 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     }
 
     /***/
-    public CountryObject getCountry(int id) {
-        return CountryDataBaseHandler.get(id, getWritableDatabase());
+    public CountryObject getCountry(int id, SQLiteDatabase db) {
+        return CountryDataBaseHandler.get(id, db);
     }
 
     /***/
-    public CountryObject getCountry(String name) {
-        return CountryDataBaseHandler.get(name, getWritableDatabase());
+    public CountryObject getCountry(String name, SQLiteDatabase db) {
+        return CountryDataBaseHandler.get(name, db);
     }
 
     // REGIONS
@@ -135,14 +108,14 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     /**
      * Return all regions placed on selected country
      */
-    public List<RegionObject> getAllRegions(int id) {
-        return RegionDataBaseHandler.getAll(id, getWritableDatabase());
+    public List<RegionObject> getAllRegions(int id, SQLiteDatabase db) {
+        return RegionDataBaseHandler.getAll(id, db);
     }
 
     /***/
-    public List<String> getAllRegionsName(String name) {
-        int id = getCountry(name).getId();
-        List<RegionObject> objects = RegionDataBaseHandler.getAll(id, getWritableDatabase());
+    public List<String> getAllRegionsName(String name, SQLiteDatabase db) {
+        int id = getCountry(name, db).getId();
+        List<RegionObject> objects = RegionDataBaseHandler.getAll(id, db);
 
         List<String> names = new ArrayList<String>();
         for (RegionObject ob : objects) {
@@ -152,12 +125,12 @@ public class SystemDataBaseHandler extends SQLiteOpenHelper {
     }
 
     /***/
-    public RegionObject getRegion(int id) {
-        return RegionDataBaseHandler.get(id, getWritableDatabase());
+    public RegionObject getRegion(int id, SQLiteDatabase db) {
+        return RegionDataBaseHandler.get(id, db);
     }
 
     /***/
-    public RegionObject getRegion(String name) {
-        return RegionDataBaseHandler.get(name, getWritableDatabase());
+    public RegionObject getRegion(String name, SQLiteDatabase db) {
+        return RegionDataBaseHandler.get(name, db);
     }
 }

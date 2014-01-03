@@ -158,7 +158,7 @@ public class AddDialog extends DialogActivity implements OnItemSelectedListener 
         if (name != "") {
             int region = _db.getRegion(name).getId();
             int year = _calendar.get(Calendar.YEAR) + (_year.getCurrentItem() - NoOfYears);
-            int month = _month.getCurrentItem();
+            int month = _month.getCurrentItem() + 1;
             VisitedRegionObject visitedRegion = new VisitedRegionObject(region, year, month);
 
             _db.addVisitedRegion(visitedRegion);

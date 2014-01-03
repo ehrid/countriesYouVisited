@@ -7,9 +7,16 @@
     <!-- Menu -->
     <string name="menu_add">ADD REGION</string>
 
-    <!-- Countries -->
+    <!-- Add/Remove -->
     <string name="continent_prompt">Territory</string>
     <string name="country_prompt">Country</string>
     <string name="region_prompt">Region</string>
-
+    <string name="date_prompt">Date</string>
+    <string name="no_regions_prompt">NO ADDED REGIONS</string>
+    
+    <!-- Notyfication -->
+    <string name="notyfication_title">Are you sure?</string>
+    <string name="notyfication_yes">Yes</string>
+    <string name="notyfication_no">No</string>
+    
 </resources>

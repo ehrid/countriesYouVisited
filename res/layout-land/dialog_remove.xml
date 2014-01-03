@@ -4,67 +4,67 @@
 
     <TextView
         android:id="@+id/remove_no_items"
-        android:layout_width="250sp"
+        android:layout_width="@dimen/remove_no_items_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="5sp"
+        android:layout_marginLeft="@dimen/remove_no_items_margin"
         android:background="@drawable/button_unactive"
         android:gravity="center"
-        android:text="NO ADDED REGIONS"
+        android:text="@string/no_regions_prompt"
         android:textColor="@color/text_red"
-        android:textSize="20sp"
+        android:textSize="@dimen/remove_no_items_text_size"
         android:visibility="invisible" />
     
     <LinearLayout
         android:id="@+id/remove_list_labels"
-        android:layout_width="400sp"
+        android:layout_width="@dimen/remove_list_width"
         android:layout_height="wrap_content" 
         android:orientation="horizontal">
         
         <Button
             android:id="@+id/remove_sort_continent"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/remove_list_first_width"
             android:layout_height="@dimen/menu_button_height"
             android:background="@drawable/style_button"
-            android:text="Territory"
+            android:text="@string/continent_prompt"
             android:textColor="@color/text_white"
             android:textSize="@dimen/menu_button_text_size" />
         
         <Button
             android:id="@+id/remove_sort_country"
-            android:layout_width="99dp"
+            android:layout_width="@dimen/remove_list_rest_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_marginLeft="1sp"
+            android:layout_marginLeft="@dimen/remove_list_margin"
             android:background="@drawable/style_button"
-            android:text="Country"
+            android:text="@string/country_prompt"
             android:textColor="@color/text_white"
             android:textSize="@dimen/menu_button_text_size" />
         
         <Button
             android:id="@+id/remove_sort_region"
-            android:layout_width="99dp"
+            android:layout_width="@dimen/remove_list_rest_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_marginLeft="1sp"
+            android:layout_marginLeft="@dimen/remove_list_margin"
             android:background="@drawable/style_button"
-            android:text="Region"
+            android:text="@string/region_prompt"
             android:textColor="@color/text_white"
             android:textSize="@dimen/menu_button_text_size" />
         
         <Button
             android:id="@+id/remove_sort_date"
-            android:layout_width="99dp"
+            android:layout_width="@dimen/remove_list_rest_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_marginLeft="1sp"
+            android:layout_marginLeft="@dimen/remove_list_margin"
             android:background="@drawable/style_button"
-            android:text="Date"
+            android:text="@string/date_prompt"
             android:textColor="@color/text_white"
             android:textSize="@dimen/menu_button_text_size" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/remove_list"
-        android:layout_width="400sp"
-        android:layout_height="200sp"
+        android:layout_width="@dimen/remove_list_width"
+        android:layout_height="@dimen/remove_list_height"
         android:layout_below="@+id/remove_list_labels"
         android:clickable="true"
         android:divider="@null"

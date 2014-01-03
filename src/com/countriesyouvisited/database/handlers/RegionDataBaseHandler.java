@@ -26,17 +26,21 @@ public class RegionDataBaseHandler {
 
     private static final String KEY_POINTS = "points";
 
+    private static final String KEY_COUNTRY = "countryName";
+
+    private static final String KEY_CONTINENT = "continentName";
+
     /***/
     public static String getCreateSQL() {
         return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_PARENT + " INTEGER," +
-            KEY_SURFACE + " INTEGER," + KEY_POINTS + " TEXT)";
+            KEY_SURFACE + " INTEGER," + KEY_POINTS + " TEXT," + KEY_COUNTRY + " TEXT," + KEY_CONTINENT + " TEXT)";
     }
 
     /***/
     public static List<RegionObject> getAll(int id, SQLiteDatabase db) {
         List<RegionObject> continentList = new ArrayList<RegionObject>();
 
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS, KEY_COUNTRY, KEY_CONTINENT };
         String where = KEY_PARENT + "=?";
         String[] whatValue = new String[] { String.valueOf(id) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
@@ -53,7 +57,9 @@ public class RegionDataBaseHandler {
                 int parentValue = Integer.parseInt(cursor.getString(2));
                 int surfaceValue = Integer.parseInt(cursor.getString(3));
                 String pointsValue = cursor.getString(4);
-                RegionObject item = new RegionObject(idValue, nameValue, parentValue, surfaceValue, pointsValue);
+                String countryNameValue = cursor.getString(5);
+                String continentNameValue = cursor.getString(6);
+                RegionObject item = new RegionObject(idValue, nameValue, parentValue, surfaceValue, pointsValue, countryNameValue, continentNameValue);
                 continentList.add(item);
             }
             while (cursor.moveToNext());
@@ -64,7 +70,7 @@ public class RegionDataBaseHandler {
 
     /***/
     public static RegionObject get(int id, SQLiteDatabase db) {
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS, KEY_COUNTRY, KEY_CONTINENT };
         String where = KEY_ID + "=?";
         String[] whatValue = new String[] { String.valueOf(id) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
@@ -74,7 +80,7 @@ public class RegionDataBaseHandler {
 
     /***/
     public static RegionObject get(String name, SQLiteDatabase db) {
-        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS };
+        String[] values = new String[] { KEY_ID, KEY_NAME, KEY_PARENT, KEY_SURFACE, KEY_POINTS, KEY_COUNTRY, KEY_CONTINENT };
         String where = KEY_NAME + "=?";
         String[] whatValue = new String[] { String.valueOf(name) };
         Cursor cursor = db.query(TABLE_NAME, values, where, whatValue, null, null, null, null);
@@ -93,7 +99,9 @@ public class RegionDataBaseHandler {
                 int parentValue = Integer.parseInt(cursor.getString(2));
                 int surfaceValue = Integer.parseInt(cursor.getString(3));
                 String pointsValue = cursor.getString(4);
-                return new RegionObject(idValue, nameValue, parentValue, surfaceValue, pointsValue);
+                String countryNameValue = cursor.getString(5);
+                String continentNameValue = cursor.getString(6);
+                return new RegionObject(idValue, nameValue, parentValue, surfaceValue, pointsValue, countryNameValue, continentNameValue);
             }
         }
 

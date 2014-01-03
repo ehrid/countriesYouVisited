@@ -14,7 +14,7 @@
             android:id="@+id/add_continent"
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/menu_button_margins"
             android:background="@drawable/spinner"
             android:prompt="@string/continent_prompt" />
 
@@ -22,7 +22,7 @@
             android:id="@+id/add_country"
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/menu_button_margins"
             android:background="@drawable/spinner"
             android:prompt="@string/country_prompt" />
 
@@ -30,7 +30,7 @@
             android:id="@+id/add_region"
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/menu_button_margins"
             android:background="@drawable/spinner"
             android:prompt="@string/region_prompt" />
     </LinearLayout>
@@ -43,12 +43,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="90sp"
-            android:layout_margin="5sp" >
+            android:layout_height="@dimen/add_date_layout_height"
+            android:layout_margin="@dimen/menu_button_margins" >
 
             <com.countriesyouvisited.wheel.WheelView
                 android:id="@+id/add_months"
-                android:layout_width="120sp"
+                android:layout_width="@dimen/add_date_month_width"
                 android:layout_height="match_parent" />
 
             <com.countriesyouvisited.wheel.WheelView
@@ -61,7 +61,7 @@
             android:id="@+id/add_button"
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/menu_button_margins"
             android:background="@drawable/style_button"
             android:text="@string/menu_add"
             android:textColor="@color/text_white"
